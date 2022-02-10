@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load static%}
+
+{% block title %}{{quiz.title}} {% endblock %}
+
+{% block content %}
+{% if results %}
+<h1>{{quiz.title}}</h1>
+<p>Your answered right {{results_info.score}} of {{results_info.divisor}}</p>
+<hr>
+<br>
+<table>
+    <tr>
+        <th>
+            Score
+        </th>
+        <th>
+            Bonus
+        </th>
+        <th>
+            Percentage
+        </th>
+        <th>
+            Your grade
+        </th>
+        
+    </tr>
+    <tr>
+        <td>
+            {{results_info.score}}
+        </td>
+        <td>
+            {{results_info.bonus}}
+        </td>
+        <td>
+            {{results_info.percentage}}%
+        </td>
+        <td>
+            {{results_info.grade}}
+        </td>
+    </tr>
+</table>
+<p>Your final score is {{results_info.total_score}}</p>
+{% else %}
+    <h1>{{quiz.title}}</h1>
+    <form action="{{quiz.id}}/results" method="POST">
+        {% csrf_token %}
+        {% for question in questions %}
+
+            <br><p><u>{{question}}</u></p>
+
+            <input type="radio" id="{{question.id}}-option1" name="{{question}}" value="{{question.option1}}" required>
+            <label for="{{question.id}}-option">{{question.option1}}</label><br>
+
+            <input type="radio" id="{{question.id}}-option2" name="{{question}}" value="{{question.option2}}" required>
+            <label for="{{question.id}}-option2">{{question.option2}}</label><br>
+
+            <input type="radio" id="{{question.id}}-option3" name="{{question}}" value="{{question.option3}}" required>
+            <label for="{{question.id}}-option3">{{question.option3}}</label><br>
+
+            <input type="radio" id="{{question.id}}-option4" name="{{question}}" value="{{question.option4}}" required>
+            <label for="{{question.id}}-option4">{{question.option4}}</label><br>
+
+
+        {% endfor %}
+        <br><input type="submit">
+    </form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="en">
+    <meta name="viewport" value="width=device-width initial-scale=1.0 shrink-to-fit=no">
+    <title>{% block title %}Quiz Application | Demo< {% endblock %}</title>
+</head>
+<body>
+    <div  id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+<footer>
+    <p id="copyright-text">
+    </p>
+    <script src="{% static 'quizapp/js/actuallity.js' %}"></script>
+</footer>
+
+</html>
